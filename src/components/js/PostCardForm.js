@@ -5,7 +5,6 @@ import Button from '@material-ui/core/Button';
 import Paper from "@material-ui/core/Paper";
 import InputBase from "@material-ui/core/InputBase";
 import ListRecipients from "./ListRecipients.js";
-import { addresses } from "lob/lib/resources";
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -189,7 +188,7 @@ class PostCardForm extends Component {
                         addresses={this.state.addresses}/> 
                 }
 
-                { this.state.selectedAddress.length == 0 ?  
+                { this.state.selectedAddress.length === 0 ?  
                     <Paper className={classes.root} component="form">
                         <InputBase 
                         className={classes.input} 
