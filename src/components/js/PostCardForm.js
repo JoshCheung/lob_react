@@ -14,7 +14,6 @@ import TableRow from '@material-ui/core/TableRow';
 const useStyles = theme => ({
     root: {
       padding: "2px 4px",
-      display: "flex",
       alignItems: "left",
       boxShadow: "0 0 8px rgba(0, 0, 0, 0.25)",
     },
@@ -34,6 +33,7 @@ const useStyles = theme => ({
         }
     },
     address: {
+        width: "100%",
         padding: "2px 4px",
         display: "flex",
         alignItems: "left",
