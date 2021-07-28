@@ -87,7 +87,7 @@ class PostCardForm extends Component {
                     addresses: res.data
                 })
                 this.state.addresses.sort(this.compare);
-            console.log(res.data);
+//             console.log(res.data);
             })
             .catch((e) => {
             console.log(e);
@@ -144,12 +144,12 @@ class PostCardForm extends Component {
 
     
     selectAddress(address) {
-        console.log("PARENT");
-        console.log(address);
+//         console.log("PARENT");
+//         console.log(address);
         this.setState({
             selectedAddress: address
         });
-        console.log(this.state.selectedAddress);
+//         console.log(this.state.selectedAddress);
     }
 
     onCancel() {
