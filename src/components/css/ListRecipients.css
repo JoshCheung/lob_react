@@ -1,0 +1,25 @@
+.list-container {
+    position: absolute;
+    margin-top: 215px;
+    width: 30%;
+    height: 40%;
+    background: white;
+    z-index: 1;
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+}
+
+.address-text {
+    font-size: 1.2vh;
+    color: #6083a5;
+}
+
+.name-text {
+    font-size: 1.3vh;
+    color: #6083a5;
+}
+
+.address-id {
+    font-size: 1.2vh;
+    color: #6083a5;
+}

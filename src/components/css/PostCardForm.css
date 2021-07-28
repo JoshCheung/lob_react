@@ -1,0 +1,20 @@
+.form-component {
+    display: flex;
+    flex-direction: column;
+    width: 25%;
+}
+
+.form-lables {
+    display: flex;
+    text-align: right;
+    color: black;
+    font-size: 1.7vh;
+}
+
+.submit-button {
+    text-transform: none;
+    width: 25%;
+    max-width: 100px;
+    background-color: #4287f5;
+    color: white;
+}
