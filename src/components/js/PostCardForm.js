@@ -90,7 +90,7 @@ class PostCardForm extends Component {
             // console.log(res.data);
             })
             .catch((e) => {
-            // console.log(e);
+            console.log(e);
         });
         
         // var searchUrl = 'https://api.lob.com/v1/search?q="testing"';
@@ -121,10 +121,14 @@ class PostCardForm extends Component {
         return function(person1, person2) {
             const person1Name = person1.name.split(' ');
             const person2Name = person2.name.split(' ');
-            if(person1Name[0].includes(query) < person2Name[0].includes(query)) {
+            
+            if (person1Name[0].includes(query) < person2Name[0].includes(query)) {
                 return 1;
             } 
-            else if (person1Name[0].includes(query) > person2Name[0].includes(query)) {
+            // else if () {
+            //     return -1;
+            // }
+            else if (person1Name[0].indexOf(query) < person2Name[0].indexOf(query) || person1Name[0].includes(query) > person2Name[0].includes(query)) {
                 return -1;
             } 
             else {
