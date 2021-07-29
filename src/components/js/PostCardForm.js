@@ -87,7 +87,6 @@ class PostCardForm extends Component {
                     addresses: res.data
                 })
                 this.state.addresses.sort(this.compare);
-            // console.log(res.data);
             })
             .catch((e) => {
             console.log(e);
@@ -125,9 +124,6 @@ class PostCardForm extends Component {
             if (person1Name[0].includes(query) < person2Name[0].includes(query)) {
                 return 1;
             } 
-            // else if () {
-            //     return -1;
-            // }
             else if (person1Name[0].indexOf(query) < person2Name[0].indexOf(query) || person1Name[0].includes(query) > person2Name[0].includes(query)) {
                 return -1;
             } 
