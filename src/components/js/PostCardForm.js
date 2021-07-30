@@ -50,6 +50,7 @@ class PostCardForm extends Component {
         super(props);
         this.state = {
             addresses: [],
+            filtered: [],
             search: '',
             recipientInputModal: false,
             selectedAddress: []
@@ -87,6 +88,7 @@ class PostCardForm extends Component {
                     addresses: res.data
                 })
                 this.state.addresses.sort(this.compare);
+            // console.log(res.data);
             })
             .catch((e) => {
             console.log(e);
@@ -112,34 +114,49 @@ class PostCardForm extends Component {
                 recipientInputModal: false,
             });
         }
-        
-        this.state.addresses.sort(this.filter(value.toUpperCase()));
+        // let filter = this.state.addresses.filter(address => { return address.name.toUpperCase().includes(value.toUpperCase())});
+        let filter = this.state.addresses.sort(this.filter(value.toUpperCase()));
+        this.setState({
+            filtered: filter
+        })
+        // console.log(filter);
     }
 
     filter(query) {
         return function(person1, person2) {
-            const person1Name = person1.name.split(' ');
-            const person2Name = person2.name.split(' ');
-            
-            if (person1Name[0].includes(query) < person2Name[0].includes(query)) {
+            // const person1Name = person1.name.split(/\s+/); //split by any amount of spaces
+            // const person2Name = person2.name.split(/\s+/);
+
+            // var index1 = person1Name[0].indexOf(query); //check index of searched item
+            // var index2 = person2Name[0].indexOf(query);
+            var index1 = person1.name.indexOf(query); //check index of searched item in name
+            var index2 = person2.name.indexOf(query);
+
+            if (index1 === -1 && index1 < index2) {     //if searched item does not exist for each name
+                return 1;                               //has higher precedence in name2 if not found name1
+            }
+            else if (index2 === -1 && index1 > index2) { 
+                return -1;                              //has higher precedence in name1 if not found name2
+            }   
+            else if (index1 > index2) {                 //name2 has higher precedence if indexOf is smaller than name1
                 return 1;
             } 
-            else if (person1Name[0].indexOf(query) < person2Name[0].indexOf(query) || person1Name[0].includes(query) > person2Name[0].includes(query)) {
+            else if (index1 < index2) {                 //name1 has higher precedence if indexOf is smaller than name2
                 return -1;
-            } 
-            else {
-                if(person1.name < person2.name)
+            }
+            else {              
+                if(person1.name < person2.name)         //if either are not found then compare names in general
                     return 1;
                 else
                     return -1;
             }
-        }
+        };
     }
 
     toggleModal(){
         this.setState({
             recipientInputModal: false,
-        })
+        });
     }
 
     
@@ -182,7 +199,7 @@ class PostCardForm extends Component {
                     <ListRecipients 
                         selectAddress={this.selectAddress} 
                         toggleModal={this.toggleModal}
-                        addresses={this.state.addresses}/> 
+                        addresses={this.state.filtered}/> 
                 }
 
                 { this.state.selectedAddress.length === 0 ?  
