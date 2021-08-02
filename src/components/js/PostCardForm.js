@@ -20,6 +20,7 @@ const useStyles = theme => ({
     input: {
       marginLeft: theme.spacing(1),
       flex: 1,
+      height: "3.5vh",
       display: "flex"
     },
     button: {
@@ -27,6 +28,7 @@ const useStyles = theme => ({
         backgroundColor: "#0499D7",
         textTransform: "none",
         display: "flex",
+        height: "3.5vh",
         width: "25%",
         "&:hover": {
           backgroundColor: "#0499D7"
@@ -194,14 +196,6 @@ class PostCardForm extends Component {
                     To:
                 </p>
 
-
-                { this.state.recipientInputModal && 
-                    <ListRecipients 
-                        selectAddress={this.selectAddress} 
-                        toggleModal={this.toggleModal}
-                        addresses={this.state.filtered}/> 
-                }
-
                 { this.state.selectedAddress.length === 0 ?  
                     <Paper className={classes.root} component="form">
                         <InputBase 
@@ -243,6 +237,16 @@ class PostCardForm extends Component {
                     </Table>
                 }
 
+                
+                { this.state.recipientInputModal &&
+                    <div className="list-component">
+                        <ListRecipients 
+                            selectAddress={this.selectAddress} 
+                            toggleModal={this.toggleModal}
+                            addresses={this.state.filtered}/> 
+                    </div>
+                    
+                }
 
                 <br/>
                 <p className="form-lables">

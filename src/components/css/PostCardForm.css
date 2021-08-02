@@ -1,14 +1,20 @@
 .form-component {
     display: flex;
     flex-direction: column;
-    width: 25%;
+    width: 30%;
+}
+
+.list-component {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
 }
 
 .form-lables {
     display: flex;
     text-align: right;
     color: black;
-    font-size: 1.7vh;
+    font-size: 1.8vh;
 }
 
 .submit-button {
