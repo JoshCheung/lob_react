@@ -239,13 +239,10 @@ class PostCardForm extends Component {
 
                 
                 { this.state.recipientInputModal &&
-                    <div className="list-component">
-                        <ListRecipients 
-                            selectAddress={this.selectAddress} 
-                            toggleModal={this.toggleModal}
-                            addresses={this.state.filtered}/> 
-                    </div>
-                    
+                    <ListRecipients 
+                        selectAddress={this.selectAddress} 
+                        toggleModal={this.toggleModal}
+                        addresses={this.state.filtered}/> 
                 }
 
                 <br/>
