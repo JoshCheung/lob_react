@@ -4,11 +4,11 @@
     width: 25%;
 }
 
-/* .list-component {
+.list-component {
     display: flex;
     flex-direction: column;
     width: 30%;
-} */
+}
 
 .form-lables {
     display: flex;
