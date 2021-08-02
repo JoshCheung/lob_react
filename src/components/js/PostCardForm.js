@@ -9,6 +9,9 @@ import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
+import Modal from '@material-ui/core/Modal';
+import Backdrop from '@material-ui/core/Backdrop';
+import Fade from '@material-ui/core/Fade';
 
 
 const useStyles = theme => ({
@@ -34,6 +37,17 @@ const useStyles = theme => ({
           backgroundColor: "#0499D7"
         }
     },
+    modal: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    paper: {
+        backgroundColor: theme.palette.background.paper,
+        border: '2px solid #000',
+        boxShadow: theme.shadows[5],
+        padding: theme.spacing(2, 4, 3),
+    },
     address: {
         width: "100%",
         padding: "2px 4px",
@@ -46,7 +60,6 @@ const useStyles = theme => ({
     },
 });
 
-
 class PostCardForm extends Component {
     constructor (props) {
         super(props);
@@ -55,13 +68,13 @@ class PostCardForm extends Component {
             filtered: [],
             search: '',
             recipientInputModal: false,
-            selectedAddress: []
-
-            
+            selectedAddress: [],
+            submitted: false,      
         }
         this.recipientInputChange = this.recipientInputChange.bind(this);
         this.selectAddress = this.selectAddress.bind(this);
         this.toggleModal = this.toggleModal.bind(this);
+        this.handleClose = this.handleClose.bind(this);
 
     }
     componentDidMount() {
@@ -116,21 +129,19 @@ class PostCardForm extends Component {
                 recipientInputModal: false,
             });
         }
-        // let filter = this.state.addresses.filter(address => { return address.name.toUpperCase().includes(value.toUpperCase())});
         let filter = this.state.addresses.sort(this.filter(value.toUpperCase()));
         this.setState({
             filtered: filter
         })
-        // console.log(filter);
     }
 
     filter(query) {
         return function(person1, person2) {
             // const person1Name = person1.name.split(/\s+/); //split by any amount of spaces
             // const person2Name = person2.name.split(/\s+/);
-
             // var index1 = person1Name[0].indexOf(query); //check index of searched item
             // var index2 = person2Name[0].indexOf(query);
+            
             var index1 = person1.name.indexOf(query); //check index of searched item in name
             var index2 = person2.name.indexOf(query);
 
@@ -168,6 +179,12 @@ class PostCardForm extends Component {
         });
     }
 
+    onSubmit() {
+        this.setState({
+            submitted: true
+        })
+    }
+
     onCancel() {
         this.setState({
             selectedAddress: [],
@@ -175,6 +192,12 @@ class PostCardForm extends Component {
         })
         this.toggleModal();
     }
+    
+    handleClose(){
+        this.setState({
+            submitted: false
+        }) 
+    };
 
     render() {
         
@@ -273,9 +296,40 @@ class PostCardForm extends Component {
                     variant="contained"
                     color="primary"
                     className={classes.button}
-                    onClick={() => { this.testing()}}>
+                    onClick={() => {this.onSubmit()}}>
                     Submit
                 </Button>
+                {this.state.submitted && 
+                    <Modal
+                        aria-labelledby="transition-modal-title"
+                        aria-describedby="transition-modal-description"
+                        className={classes.modal}
+                        open={this.state.submitted}
+                        onClose={this.handleClose}
+                        closeAfterTransition
+                        BackdropComponent={Backdrop}
+                    >
+                    <Fade in={this.state.submitted}>
+                      <div className={classes.paper}>
+                            <h2 id="transition-modal-title">PostCard has been sent!</h2>
+                            <b>Name:</b> 
+                                <p>{this.state.selectedAddress.name}</p>
+                            <br/>
+                            <b>AddressID:</b> 
+                                <p>{this.state.selectedAddress.id}</p>
+                            <br/>
+                            <b>Address:</b>
+                                <p>
+                                    {this.state.selectedAddress.address_line1} {this.state.selectedAddress.address_line2} 
+                                <br></br>
+                                    {this.state.selectedAddress.address_city} {this.state.selectedAddress.address_state} {this.state.selectedAddress.address_zip} 
+                                <br></br>
+                                    {this.state.selectedAddress.address_country}
+                                </p>
+                      </div>
+                    </Fade>
+                  </Modal>
+                }
             </div>
         );
     }
