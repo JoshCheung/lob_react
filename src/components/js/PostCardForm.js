@@ -183,6 +183,7 @@ class PostCardForm extends Component {
         this.setState({
             submitted: true
         })
+        
     }
 
     onCancel() {
@@ -197,6 +198,7 @@ class PostCardForm extends Component {
         this.setState({
             submitted: false
         }) 
+        this.onCancel();
     };
 
     render() {
@@ -311,7 +313,7 @@ class PostCardForm extends Component {
                     >
                     <Fade in={this.state.submitted}>
                       <div className={classes.paper}>
-                            <h2 id="transition-modal-title">PostCard has been sent!</h2>
+                            <h2 id="transition-modal-title">Mock Postcard sent verification!</h2>
                             <b>Name:</b> 
                                 <p>{this.state.selectedAddress.name}</p>
                             <br/>
